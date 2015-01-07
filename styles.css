@@ -92,13 +92,13 @@ a{
 }
 
 #footer{
-  overflow:hidden;
+  overflow:auto;
   padding:1em;
   background-color:#ccc;
   box-shadow:0 -1px 5px #555;
 }
 
-#footer #notice{
+.right{
   float:right;
 }
 
