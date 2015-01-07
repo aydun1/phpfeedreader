@@ -6,18 +6,10 @@
 -->
 <html lang="en">
 <head>
-  <title>Urbex Feed Reader</title>
+  <title>PHP Feed Reader</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="robots" content="noindex">
-  <meta name="msapplication-TileColor" content="#da532c">
-  <meta name="msapplication-TileImage" content="/mstile-144x144.png">
-  <link rel="icon" type="image/png" href="/favicon-196x196.png" sizes="196x196">
-  <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
-  <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
-  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
   <style>
     body{padding-top:3em;margin:0;background-color:#E5E5E5}
     h1,h2,p{margin:0}
@@ -39,7 +31,6 @@
     @media(max-width:880px){#container{padding:10px;}}
     @media(max-width:660px){#container{padding:10px 0} .post{float:inherit;width:inherit;} .inner{margin-bottom:8px} .post_contents{height:inherit;}}
   </style>
-<?php include "/share/Web/site_template/analyticstracking.php"; ?>
 </head>
 <body>
   <div id=heading>
