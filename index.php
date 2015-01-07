@@ -34,7 +34,7 @@
 </head>
 <body>
   <div id=heading>
-    <h1>Urbex Feed Reader</h1>
+    <h1>PHP Feed Reader</h1>
   </div>
   <div id=container>
 <?php foreach ($BLOGARRAY as $BLOGITEM): ?>
