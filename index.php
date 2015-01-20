@@ -13,7 +13,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="stylesheet" href="styles.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-  <script>var last_updated = <?php echo $REFRESHTIME;?>;</script>
+  <script>var last_updated = <?=$REFRESHTIME;?>;</script>
   <script src="functions.js"></script>
 </head>
 <body>

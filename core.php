@@ -1,23 +1,14 @@
 <?PHP
 $CACHETIME = 720; # minutes
 $CHARLENGTH = 170; # number of characters to trim description to
-$BLOGURLS = array( "http://urbex.aydun.net/rss/",
-                   "http://sync-below.com/feed/",
-                   "http://obscurepieces.com/feed/",
-                   "http://lost-photons.blogspot.com/feeds/posts/default?alt=rss",
-                   "http://brisbane-urbex.blogspot.com.au/feeds/posts/default?alt=rss",
-                   "http://www.longexposure.net/?feed=rss2",
-                   "http://www.the-f-stop.com/feed/",
-                   "http://om2photo.com/feed/",
-                   "http://saoirse-2010.livejournal.com/data/rss",
-                   "http://www.abandonedjourney.com/feed/",
-                   "http://undermontreal.com/feed/",
-                   "http://uexplorer.wordpress.com/feed/",
-                   "http://urbanexplorationsydney.blogspot.com.au/feeds/posts/default?alt=rss",
-                   "http://urbexbayarea.tumblr.com/rss",
-                   "http://urbexzone.wordpress.com/feed/",
-                   "http://siologen.livejournal.com/data/rss",
-                   "http://sectionsix.net/feed/",
+$BLOGURLS = array( "http://www.abc.net.au/news/feed/51120/rss.xml",
+                   "http://d.yimg.com/am/top_stories.xml",
+                   "http://feeds.news.com.au/heraldsun/rss/heraldsun_news_breakingnews_2800.xml",
+                   "http://www.smh.com.au/rssheadlines/top.xml",
+                   "http://feeds.news.com.au/public/rss/2.0/news_national_3354.xml",
+                   "http://sbs.feedsportal.com/c/34692/f/637303/index.rss",
+                   "http://feeds.feedburner.com/TheAustralianNewsNDM?format=xml",
+                   "http://feeds.feedburner.com/dailytelegraphbreakingnewsndm?format=xml",
                  ); 
 
 
@@ -94,7 +85,11 @@ function lastRefreshTime($BLOGURLS) {
       }    
     }
   }
-  return $refreshed;
+  if (empty($refreshed)) {
+    return 9999;
+  } else {
+    return $refreshed; 
+  }
 }
 
 function requestUpdate($BLOGURLS, $CACHETIME) {
@@ -222,7 +217,7 @@ if(isset($_GET["mode"])){
     exit();
   }
   elseif(trim($_GET["mode"]) == 'update') {
-    requestUpdate($BLOGURLS, 60);
+    requestUpdate($BLOGURLS, 1);
     $BLOGARRAY = filesToArray($BLOGURLS);
     returnJSON($BLOGARRAY);
     exit();
