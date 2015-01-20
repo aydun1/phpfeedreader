@@ -71,6 +71,31 @@ function returnJSON($posts) {
   print json_encode($json_data);
 }
 
+function returnUpdated($posts) {
+  header('Content-Type: application/json');
+  $json_data = array();
+  foreach($posts as $myObj) {
+    $data = array();
+    $data["blogMd5"] = $myObj->getBlogMD5();
+	$data["postDateTime"] = $myObj->getPostDateTime();
+    $json_data[] = $data;
+  }  
+  print json_encode($json_data);
+}
+
+function lastRefreshTime($BLOGURLS) {
+  $refreshed;
+  foreach($BLOGURLS as $BLOGURL) {
+    $CACHEFILE  = "/tmp/" . md5($BLOGURL);
+    if(file_exists($CACHEFILE)) {
+      $file_time = time() - filemtime($CACHEFILE);
+      if(empty($refreshed) || $refreshed < $file_time) {
+        $refreshed = $file_time;
+      }    
+    }
+  }
+  return $refreshed;
+}
 
 function requestUpdate($BLOGURLS, $CACHETIME) {
   foreach($BLOGURLS as $BLOGURL) {
@@ -154,10 +179,11 @@ class BlogDetails {
   public function getPostUrl(){
     return $this->post_URL;
   }
-  public function getPostDescription($numberChars){
+  public function getPostDescription($CHARLENGTH){
+    $CHARLENGTH = 170;
     $trimmedDesc = strip_tags($this->post_DESCRIPTION);
     $trimmedDesc = trim($trimmedDesc, " \r\n");
-    if (strlen($trimmedDesc) > $numberChars and preg_match("/^.{1,$numberChars}\b/u", $trimmedDesc, $match)){
+    if (strlen($trimmedDesc) > $CHARLENGTH and preg_match("/^.{1,$CHARLENGTH}\b/u", $trimmedDesc, $match)){
       $trimmedDesc=trim($match[0], " ") . "...";
     }
     return $trimmedDesc;
@@ -188,28 +214,29 @@ class Database extends SQLite3
 
 
 
-if(php_sapi_name() == 'cli') {
-requestUpdate($BLOGURLS, 1);
-return;
-}
-
-
-elseif(isset($_GET["mode"])){
+if(isset($_GET["mode"])){
   if(trim($_GET["mode"]) == 'json') {
     requestUpdate($BLOGURLS, $CACHETIME);
     $BLOGARRAY = filesToArray($BLOGURLS);
     returnJSON($BLOGARRAY);
+    exit();
   }
   elseif(trim($_GET["mode"]) == 'update') {
-    header('Location: ./');
-    requestUpdate($BLOGURLS, 1);
+    requestUpdate($BLOGURLS, 60);
+    $BLOGARRAY = filesToArray($BLOGURLS);
+    returnJSON($BLOGARRAY);
+    exit();
+  }
+  elseif(trim($_GET["mode"]) == 'last-updated') {
+    $BLOGARRAY = filesToArray($BLOGURLS);
+    returnUpdated($BLOGARRAY);
+    exit();
   }
 }
 
-else {
-  $BLOGARRAY = filesToArray($BLOGURLS);
-  requestUpdate($BLOGURLS, $CACHETIME);
 
-}
+$BLOGARRAY = filesToArray($BLOGURLS);
+$REFRESHTIME = lastRefreshTime($BLOGURLS);
+
 
 ?>

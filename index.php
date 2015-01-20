@@ -12,6 +12,9 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="stylesheet" href="styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script>var last_updated = <?php echo $REFRESHTIME;?>;</script>
+  <script src="functions.js"></script>
 </head>
 <body>
   <div id="heading">
@@ -19,7 +22,7 @@
   </div>
   <div id="container">
 <?php foreach ($BLOGARRAY as $BLOGITEM): ?>
-    <div id="<?=$BLOGITEM->getBlogMd5()?>" class="post <?=$BLOGITEM->getPostDateTime()?>">
+    <div id="<?=$BLOGITEM->getBlogMd5()?>" class="post" data-date="<?=$BLOGITEM->getPostDateTime()?>">
       <div class="inner">
         <div class="post_header" style="background-image:url(https://www.google.com/s2/favicons?domain_url=<?=$BLOGITEM->getBlogURL()?>)">             
           <h2><a href="<?=$BLOGITEM->getBlogURL()?>" target="_blank"><?=htmlspecialchars($BLOGITEM->getBlogTitle())?></a></h2>
@@ -34,7 +37,7 @@
 <?php endforeach; ?>
   </div>
   <div id="footer">
-    <span id="updated">Updated <?=time_elapsed_string(filemtime("/tmp/" . $BLOGITEM->getBlogMd5()))?></span> (<a href="index.php?mode=update">update now</a>) - <a href="index.php?mode=json">JSON</a>
+    <span id="updated">Updated <?=time_elapsed_string(filemtime("/tmp/" . $BLOGITEM->getBlogMd5()))?></span> (<a href="#" onclick="requestUpdate();return false;">update now</a>) - <a href="index.php?mode=json">JSON</a>
     <span class="right">Content and linked pages are copyright their respective owners</span>
   </div>
 </body>
