@@ -1,7 +1,4 @@
 $(function() {
-
-  //compareDates() ;
-  
   if(last_updated > 300) {
     requestUpdate();
   }
@@ -23,8 +20,9 @@ function requestUpdate() {
         $(post_id + " .post_description").html(val.postDescription);		
       }
     });
+  $("#updated").html("Updated now");
+  $("#container .post").sort(sortDescending).appendTo("#container"); 
   });
-  $("#container .post").sort(sortDescending).appendTo("#container");
 };
 
 

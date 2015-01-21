@@ -9,6 +9,8 @@ $BLOGURLS = array( "http://www.abc.net.au/news/feed/51120/rss.xml",
                    "http://sbs.feedsportal.com/c/34692/f/637303/index.rss",
                    "http://feeds.feedburner.com/TheAustralianNewsNDM?format=xml",
                    "http://feeds.feedburner.com/dailytelegraphbreakingnewsndm?format=xml",
+                   "http://feeds.reuters.com/reuters/topNews?format=xml",
+                   "http://feeds.bbci.co.uk/news/rss.xml",
                  ); 
 
 
