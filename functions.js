@@ -1,3 +1,11 @@
+var opts = {
+  left: "20em",
+  lines: 13,
+  length: 5,
+  width: 3,
+  radius: 5,
+};
+  
 $(function() {
   if(last_updated > 300) {
     requestUpdate();
@@ -5,9 +13,8 @@ $(function() {
 });
 
 
-
-
 function requestUpdate() {
+  $("#heading").spin(opts);
   $.getJSON( "index.php?mode=update", function( data ) {
     var items = [];
     $.each( data, function (key, val ) {
@@ -20,8 +27,9 @@ function requestUpdate() {
         $(post_id + " .post_description").html(val.postDescription);		
       }
     });
-  $("#updated").html("Updated now");
-  $("#container .post").sort(sortDescending).appendTo("#container"); 
+  $("#updated").html("Updated seconds ago");
+  $("#container .post").sort(sortDescending).appendTo("#container");
+  $("#heading").spin(false);
   });
 };
 
