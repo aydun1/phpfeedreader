@@ -5,12 +5,22 @@ var opts = {
   width: 3,
   radius: 5,
 };
-  
+var interval = setInterval( increment, 1000 );
+
+
+
+function increment(){
+last_updated += 1;
 $(function() {
+  console.log(last_updated);
   if(last_updated > 300) {
+    last_updated=0;
+    console.log("Updating");
     requestUpdate();
   }
 });
+}
+
 
 
 function requestUpdate() {
